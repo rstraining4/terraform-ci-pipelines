@@ -29,7 +29,7 @@ pipeline {
             steps {
                     checkout scm
                     sh 'git log -n1 --format="%h"'
-                    sh "cd /var/lib/jenkins/workspace/prod/CI_Pipelines/terraform-ecs-ec2/terraform-ecs-ec2"
+                    sh "cd /var/lib/jenkins/workspace/prod/CI_Pipelines/terraform-ecs-ec2-ci/terraform-ecs-ec2"
                     sh "pwd"
                     sh "ls -lat"
                     sh "/usr/bin/mvn clean install"
