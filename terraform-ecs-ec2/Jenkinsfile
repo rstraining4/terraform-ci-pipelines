@@ -5,7 +5,7 @@ pipeline {
         ansiColor('xterm')
     } 
     parameters {
-		//string(name: "git_codebase", defaultValue: "https://github.com/rstraining4/terraform-ecs-ec2.git", description: "git location of the updatedb app files")
+		//string(name: "git_codebase", defaultValue: "https://github.com/rstraining4/terraform-ci-pipelines.git", description: "git location of the updatedb app files")
         choice(
                 choices: ["build","release-start","releasebuild","release-finish"],
                 description: "Build from <env>elop branch, start a release or finish from release branch",
@@ -22,7 +22,7 @@ pipeline {
     stages {
         stage('Terraform code checkout') { 
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/rstraining4/terraform-ecs-ec2.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/rstraining4/terraform-ci-pipelines.git']]])
             }
         }
         stage('BUILD JAR') { 
@@ -68,7 +68,7 @@ pipeline {
             steps {
 				script {
 					image_version_ui = sh(script:'git log -n1 --format="%h"', returnStdout: true).trim()				
-					build job: 'TERRAFORM-PROJECT-NAME', parameters: [[$class: 'StringParameterValue', name: 'terra_action', value: 'apply'], [$class: 'StringParameterValue', name: 'git_codebase', value: 'https://github.com/rstraining4/terraform-ecs-ec2.git'], [$class: 'StringParameterValue', name: 'main_dir_name', value: 'SAS_to_S3_Project/main'], [$class: 'StringParameterValue', name: 'tf_vars', value: "image_version_ui=${image_version_ui}"]]
+					build job: 'TERRAFORM-PROJECT-NAME', parameters: [[$class: 'StringParameterValue', name: 'terra_action', value: 'apply'], [$class: 'StringParameterValue', name: 'git_codebase', value: 'https://github.com/rstraining4/terraform-ci-pipelines.git'], [$class: 'StringParameterValue', name: 'main_dir_name', value: 'SAS_to_S3_Project/main'], [$class: 'StringParameterValue', name: 'tf_vars', value: "image_version_ui=${image_version_ui}"]]
 				}
 			}
         } 
