@@ -29,9 +29,9 @@ pipeline {
             steps {
                     checkout scm
                     sh 'git log -n1 --format="%h"'
-                    sh "ls -lat"
+                    sh "cd /var/lib/jenkins/workspace/prod/CI_Pipelines/terraform-ecs-ec2/terraform-ecs-ec2"
                     sh "pwd"
-                    sh "cd terraform-ecs-ec2"
+                    sh "ls -lat"
                     sh "/usr/bin/mvn clean install"
                     sh "mv target/sasaws-0.0.1-SNAPSHOT.jar ."
             }
