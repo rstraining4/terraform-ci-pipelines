@@ -31,6 +31,7 @@ pipeline {
                     sh 'git log -n1 --format="%h"'
                     sh "ls -lat"
                     sh "pwd"
+                    sh "cd terraform-ecs-ec2"
                     sh "/usr/bin/mvn clean install"
                     sh "mv target/sasaws-0.0.1-SNAPSHOT.jar ."
             }
