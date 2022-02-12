@@ -33,7 +33,7 @@ pipeline {
                     sh "pwd"
                     sh "ls -lat"
                     sh "/usr/bin/mvn clean install"
-                    sh "mv target/sasaws-0.0.1-SNAPSHOT.jar ."
+                    sh "mv target/org.jacoco.examples.maven.java-1.0-SNAPSHOT.jar ."
             }
         }
 
