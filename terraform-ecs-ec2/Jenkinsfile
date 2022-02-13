@@ -43,7 +43,7 @@ pipeline {
 //------------------------------------------
         stage("Docker Login,build,push") {
            // when { branch 'master' }
-            steps {
+            /*steps {
 
                  sh '''
 					commitid=$(git log -n1 --format="%h")
@@ -61,6 +61,14 @@ pipeline {
                         docker image rm demo-ui:$commitid
                         docker image rm 398250248933.dkr.ecr.ap-south-1.amazonaws.com/ecs-ec2/demo-ui:$commitid
                     '''
+                }
+            }*/
+             steps {
+                sh '''aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 398250248933.dkr.ecr.ap-south-1.amazonaws.com/ecs-ec2
+                        docker build -t node-app .
+                        docker tag node-app:latest 398250248933.dkr.ecr.ap-south-1.amazonaws.com/ecs-ec2
+                        docker push 398250248933.dkr.ecr.ap-south-1.amazonaws.com/ecs-ec2
+                   '''
             }
         }
 //------------------------------------------------
