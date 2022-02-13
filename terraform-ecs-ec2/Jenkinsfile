@@ -65,8 +65,8 @@ pipeline {
             }*/
              steps {
                 sh '''aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 398250248933.dkr.ecr.ap-south-1.amazonaws.com/ecs-ec2
-                        docker build -t node-app .
-                        docker tag node-app:latest 398250248933.dkr.ecr.ap-south-1.amazonaws.com/ecs-ec2
+                        cd ${WORKSPACE}/${APPLICATION_REPO};docker build -t demo-ui .
+                        docker tag demo-ui:latest 398250248933.dkr.ecr.ap-south-1.amazonaws.com/ecs-ec2
                         docker push 398250248933.dkr.ecr.ap-south-1.amazonaws.com/ecs-ec2
                    '''
             }
