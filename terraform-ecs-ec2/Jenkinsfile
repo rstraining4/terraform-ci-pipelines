@@ -31,11 +31,10 @@ pipeline {
             steps {
                     checkout scm
                     sh 'git log -n1 --format="%h"'
-                    sh "cd /var/lib/jenkins/workspace/prod/CI_Pipelines/terraform-ecs-ec2-ci/terraform-ecs-ec2"
                     sh "pwd"
                     sh "ls -lat"
                     sh "cd ${WORKSPACE}/${APPLICATION_REPO};/usr/bin/mvn clean install"
-                    sh "mv target/org.jacoco.examples.maven.java-1.0-SNAPSHOT.jar ."
+                    sh "mv ${WORKSPACE}/${APPLICATION_REPO}/target/org.jacoco.examples.maven.java-1.0-SNAPSHOT.jar ."
             }
         }
 
